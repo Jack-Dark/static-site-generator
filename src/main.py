@@ -1,11 +1,18 @@
 from textnode import TextNode, TextType
+from htmlnode import HTMLNode
 
 
 def main():
-    dummy_node = TextNode(
+    text_node = TextNode(
         "This is some anchor text", TextType.LINK, "https://www.boot.dev"
     )
-    print(dummy_node)
+    print(text_node)
+
+    html_node = HTMLNode(
+        "b",
+        "This is some bold text",
+    )
+    print(html_node)
 
 
 if __name__ == "__main__":

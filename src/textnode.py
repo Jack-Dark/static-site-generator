@@ -18,12 +18,12 @@ class TextType(Enum):
 
 
 class TextNode:
-    def __init__(self, text, text_type, url=None):
+    def __init__(self, text: str, text_type: TextType, url: str = None):
         self.text = text
         self.text_type = text_type
         self.url = url
 
-    def __eq__(self, other):
+    def __eq__(self, other: TextNode):
         return (
             self.text_type == other.text_type
             and self.text == other.text
@@ -34,7 +34,7 @@ class TextNode:
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
 
 
-def text_node_to_html_node(text_node):
+def text_node_to_html_node(text_node: TextNode):
     match text_node.text_type:
         case TextType.TEXT:
             return LeafNode(None, text_node.text)

@@ -1,6 +1,6 @@
 from enum import Enum
 
-from htmlnode import ParentNode, LeafNode
+from htmlnode import ParentNode, HTMLNode
 from inline_markdown import text_to_textnodes
 from textnode import text_node_to_html_node, TextNode, TextType
 
@@ -54,7 +54,7 @@ def block_to_block_type(block: str):
 
 def markdown_to_html_node(markdown: str):
     blocks = markdown_to_blocks(markdown)
-    children: list[ParentNode] = []
+    children: list["ParentNode"] = []
     for block in blocks:
         html_node = block_to_html_node(block)
         children.append(html_node)
@@ -80,7 +80,7 @@ def block_to_html_node(block: str):
 
 def text_to_children(text: str):
     text_nodes = text_to_textnodes(text)
-    children: list[LeafNode] = []
+    children: list["HTMLNode"] = []
     for text_node in text_nodes:
         html_node = text_node_to_html_node(text_node)
         children.append(html_node)

@@ -1,6 +1,13 @@
 import re
 
-from textnode import TextNode, TextType, DelimiterType
+from enum import Enum
+from textnode import TextNode, TextType
+
+
+class DelimiterType(Enum):
+    BOLD = "**"
+    ITALIC = "_"
+    CODE = "`"
 
 
 def text_to_textnodes(text):
@@ -14,7 +21,7 @@ def text_to_textnodes(text):
 
 
 def split_nodes_delimiter(
-    old_nodes: list[TextNode], delimiter: str, text_type: TextType
+    old_nodes: list[TextNode], delimiter: DelimiterType, text_type: TextType
 ):
     new_nodes: list[TextNode] = []
     for old_node in old_nodes:
@@ -22,7 +29,7 @@ def split_nodes_delimiter(
             new_nodes.append(old_node)
             continue
         split_nodes: list[TextNode] = []
-        sections = old_node.text.split(delimiter)
+        sections = old_node.text.split(delimiter.value)
         if len(sections) % 2 == 0:
             raise ValueError("invalid markdown, formatted section not closed")
         for i in range(len(sections)):

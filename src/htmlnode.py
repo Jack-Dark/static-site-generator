@@ -4,8 +4,8 @@ class HTMLNode:
         self,
         tag: str = None,
         value: str = None,
-        children: list[LeafNode] = None,
-        props: None | dict[str, str] = None,
+        children: list["HTMLNode"] | None = None,
+        props: dict[str, str] | None = None,
     ):
         self.tag = tag
         self.value = value
@@ -33,12 +33,12 @@ class LeafNode(HTMLNode):
         self,
         tag: str,
         value: str,
-        props: None | dict[str, str] = None,
+        props: dict[str, str] | None = None,
     ):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        if not self.value:
+        if self.value is None:
             raise ValueError("invalid HTML: no value")
         if self.tag is None:
             return self.value
@@ -52,16 +52,16 @@ class ParentNode(HTMLNode):
     def __init__(
         self,
         tag: str,
-        children: None | list[LeafNode],
-        props: None | dict[str, str] = None,
+        children: list["HTMLNode"] | None,
+        props: dict[str, str] | None = None,
     ):
         super().__init__(tag, None, children, props)
 
     def to_html(self):
         if self.tag is None:
-            raise ValueError(" invalid HTML: no tag")
+            raise ValueError("invalid HTML: no tag")
         if self.children is None:
-            raise ValueError(" invalid HTML: no children")
+            raise ValueError("invalid HTML: no children")
 
         children_html = ""
         for child in self.children:

@@ -5,7 +5,7 @@ class HTMLNode:
         tag: str = None,
         value: str = None,
         children: list[LeafNode] = None,
-        props: None | dict[str:str] = None,
+        props: None | dict[str, str] = None,
     ):
         self.tag = tag
         self.value = value
@@ -16,7 +16,7 @@ class HTMLNode:
         raise NotImplementedError("to_html method not implemented")
 
     def props_to_html(self):
-        props_html = ""
+        props_html: str = ""
         if self.props:
             for key in self.props:
                 value = self.props[key]
@@ -33,7 +33,7 @@ class LeafNode(HTMLNode):
         self,
         tag: str,
         value: str,
-        props: None | dict[str:str] = None,
+        props: None | dict[str, str] = None,
     ):
         super().__init__(tag, value, None, props)
 
@@ -53,7 +53,7 @@ class ParentNode(HTMLNode):
         self,
         tag: str,
         children: None | list[LeafNode],
-        props: None | dict[str:str] = None,
+        props: None | dict[str, str] = None,
     ):
         super().__init__(tag, None, children, props)
 

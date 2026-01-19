@@ -17,6 +17,12 @@ class TextType(Enum):
     IMAGE = "image"
 
 
+class DelimiterType(Enum):
+    BOLD = "**"
+    ITALIC = "_"
+    CODE = "`"
+
+
 class TextNode:
     def __init__(self, text: str, text_type: TextType, url: str = None):
         self.text = text

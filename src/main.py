@@ -3,12 +3,14 @@ import sys
 import shutil
 
 from copystatic import copy_files_recursive
-from generate_page import generate_pages_recursive
+from gencontent import generate_pages_recursive
 
 
 dir_path_static = "./static"
 dir_path_public = "./docs"
-basepath = sys.argv[0]
+basepath = "/"
+if len(sys.argv) > 1:
+    basepath = sys.argv[1]
 
 
 def main():
@@ -19,7 +21,7 @@ def main():
     print("Copying static files to docs directory...")
     copy_files_recursive(dir_path_static, dir_path_public)
 
-    generate_pages_recursive("content", "template.html", "docs", basepath)
+    generate_pages_recursive("content", "template.html", dir_path_public, basepath)
 
 
 main()

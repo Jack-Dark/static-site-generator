@@ -8,15 +8,15 @@ from generate_page import generate_pages_recursive
 
 dir_path_static = "./static"
 dir_path_public = "./docs"
-basepath = sys.argv
+basepath = sys.argv[0]
 
 
 def main():
-    print("Deleting public directory...")
+    print("Deleting docs directory...")
     if os.path.exists(dir_path_public):
         shutil.rmtree(dir_path_public)
 
-    print("Copying static files to public directory...")
+    print("Copying static files to docs directory...")
     copy_files_recursive(dir_path_static, dir_path_public)
 
     generate_pages_recursive("content", "template.html", "docs", basepath)
